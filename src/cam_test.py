@@ -53,30 +53,6 @@ model = CustomCNN().cuda()
 model.load_state_dict(torch.load('../outputs/model.pth'))
 print('Model loaded')
 
-'''
-image = cv2.imread(f"../input/asl_alphabet_test/asl_alphabet_test/{args['img']}")
-image_copy = image.copy()
- 
-image = cv2.resize(image, (224, 224))
-image = aug(image=np.array(image))['image']
-image = np.transpose(image, (2, 0, 1)).astype(np.float32)
-image = torch.tensor(image, dtype=torch.float).cuda()
-image = image.unsqueeze(0)
-print(image.shape)
- 
-outputs = model(image)
-_, preds = torch.max(outputs.data, 1)
-print('PREDS', preds)
-print(f"Predicted output: {lb.classes_[preds]}")
- 
-cv2.putText(image_copy, lb.classes_[preds], (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
-cv2.imshow('image', image_copy)
-cv2.imwrite(f"../outputs/{args['img']}", image_copy)
-cv2.waitKey(0)
-'''
-
-#######################################################3
-
 cap = cv2.VideoCapture(0)
 
 if (cap.isOpened() == False):
@@ -102,24 +78,22 @@ while(cap.isOpened()):
         image = np.transpose(image, (2, 0, 1)).astype(np.float32)
         image = torch.tensor(image, dtype=torch.float).cuda()
         image = image.unsqueeze(0)
-        print(image.shape)
+        # print(image.shape)
         
         outputs = model(image)
         _, preds = torch.max(outputs.data, 1)
-        print('PREDS', preds)
-        print(f"Predicted output: {lb.classes_[preds]}")
+        # print('PREDS', preds)
+        # print(f"Predicted output: {lb.classes_[preds]}")
         
         cv2.putText(image_copy, lb.classes_[preds], (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
         cv2.imshow('image', image_copy)
         cv2.imwrite(f"../outputs/{args['img']}", image_copy)
 
-        time.sleep(0.2)
+        time.sleep(0.05)
 
         # press `q` to exit
         if cv2.waitKey(27) & 0xFF == ord('q'):
             break
-
-
 
 # release VideoCapture()
 cap.release()

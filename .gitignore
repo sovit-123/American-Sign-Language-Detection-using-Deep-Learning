@@ -135,5 +135,5 @@ input/
 *.csv
 *.h5
 *.pkl
-*.pth
+# *.pth
 Approach.md
