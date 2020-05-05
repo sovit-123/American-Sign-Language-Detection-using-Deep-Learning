@@ -8,4 +8,7 @@
   * https://www.kaggle.com/grassknoted/asl-alphabet.
 * [Changing the contrast and brightness of an image!](https://docs.opencv.org/3.4/d3/dc1/tutorial_basic_linear_transform.html).
 * [Real-time American Sign Language Recognition with Convolutional Neural Networks](http://cs231n.stanford.edu/reports/2016/pdfs/214_Report.pdf), **Brandon Garcia et al.**
+* https://github.com/vivek-kumar9696/American_Sign_Language_Detection.
+* https://github.com/loicmarie/sign-language-alphabet-recognizer.
+* https://github.com/harshbg/Sign-Language-Interpreter-using-Deep-Learning.
 * 

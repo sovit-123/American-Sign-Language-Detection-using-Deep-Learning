@@ -12,8 +12,8 @@ import argparse
 import albumentations
 import pretrainedmodels
 import torch.nn.functional as F
-
-from torchvision import models
+import time
+import cnn_models
 
 # construct the argument parser and parse the arguments
 parser = argparse.ArgumentParser()
@@ -28,28 +28,10 @@ aug = albumentations.Compose([
                 albumentations.Resize(224, 224, always_apply=True),
 ])
 
-class CustomCNN(nn.Module):
-    def __init__(self):
-        super(CustomCNN, self).__init__()
-        self.conv1 = nn.Conv2d(3, 32, 5)
-        self.pool = nn.MaxPool2d(2, 2)
-        self.conv2 = nn.Conv2d(32, 64, 5)
-        self.fc1 = nn.Linear(64, 128)
-        self.fc2 = nn.Linear(128, 256)
-        self.fc3 = nn.Linear(256, len(lb.classes_))
-
-    def forward(self, x):
-        x = self.pool(F.relu(self.conv1(x)))
-        x = self.pool(F.relu(self.conv2(x)))
-        bs, _, _, _ = x.shape
-        x = F.adaptive_avg_pool2d(x, 1).reshape(bs, -1)
-        x = F.relu(self.fc1(x))
-        x = F.relu(self.fc2(x))
-        x = self.fc3(x)
-        return x
-model = CustomCNN().cuda()
-
+# model = models.MobineNetV2(pretrained=False, requires_grad=False)
+model = cnn_models.CustomCNN().cuda()
 model.load_state_dict(torch.load('../outputs/model.pth'))
+print(model)
 print('Model loaded')
 
 image = cv2.imread(f"../input/asl_alphabet_test/asl_alphabet_test/{args['img']}")
@@ -61,10 +43,13 @@ image = torch.tensor(image, dtype=torch.float).cuda()
 image = image.unsqueeze(0)
 print(image.shape)
  
+start = time.time()
 outputs = model(image)
 _, preds = torch.max(outputs.data, 1)
 print('PREDS', preds)
 print(f"Predicted output: {lb.classes_[preds]}")
+end = time.time()
+print(f"{(end-start):.3f} seconds")
  
 cv2.putText(image_copy, lb.classes_[preds], (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
 cv2.imshow('image', image_copy)
