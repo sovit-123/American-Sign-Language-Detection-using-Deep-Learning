@@ -15,6 +15,12 @@ This project aims to achieve American Sign Language Detection using Deep Learnin
 
 The dataset used can be found on [Kaggle](https://www.kaggle.com/grassknoted/asl-alphabet.).
 
+### Specific Packages
+
+* PyTorch >= 1.4.
+* Albumentations >= 0.4.3.
+* Scikit-Learn >= 0.22.1.
+
 
 
 ## <u>Using the Repository</u>

@@ -9,7 +9,6 @@ import torch.nn as nn
 import numpy as np
 import cv2
 import argparse
-import pretrainedmodels
 import torch.nn.functional as F
 import time
 import cnn_models
