@@ -31,19 +31,3 @@ class CustomCNN(nn.Module):
         x = F.relu(self.fc1(x))
         x = self.fc2(x)
         return x
-
-class MobineNetV2():
-    def __init__(self, pretrained, requires_grad):
-        super(MobineNetV2, self).__init__()
-        self.model = models.mobilenet_v2(pretrained=pretrained)
-
-        for params in self.model.parameters():
-            params.requires_grad = requires_grad
-
-        self.model.classifier[1] = nn.Linear(1280, 1024)
-        self.model.c1 = nn.Linear(1024, 512)
-        self.model.c2 = nn.Linear(512, 512)
-        self.model.c3 = nn.Linear(512, len(lb.classes_))
-
-    def mobile_netv2(self):
-        return self.model

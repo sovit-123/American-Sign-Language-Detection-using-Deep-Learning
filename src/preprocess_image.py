@@ -1,3 +1,8 @@
+'''
+USAGE:
+python preprocess_image.py --num-images 1200
+'''
+
 import pandas as pd
 import os
 import cv2

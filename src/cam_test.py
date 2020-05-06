@@ -1,6 +1,6 @@
 '''
 USAGE:
-python test.py 
+python cam_test.py 
 '''
 
 import torch
@@ -19,34 +19,14 @@ from torchvision import models
 # load label binarizer
 lb = joblib.load('../outputs/lb.pkl')
 
-# class CustomCNN(nn.Module):
-#     def __init__(self):
-#         super(CustomCNN, self).__init__()
-#         self.conv1 = nn.Conv2d(3, 16, 5)
-#         self.pool = nn.MaxPool2d(2, 2)
-#         self.conv2 = nn.Conv2d(16, 32, 5)
-#         self.fc1 = nn.Linear(32, 64)
-#         self.fc2 = nn.Linear(64, 128)
-#         self.fc3 = nn.Linear(128, len(lb.classes_))
-
-#     def forward(self, x):
-#         x = self.pool(F.relu(self.conv1(x)))
-#         x = self.pool(F.relu(self.conv2(x)))
-#         bs, _, _, _ = x.shape
-#         x = F.adaptive_avg_pool2d(x, 1).reshape(bs, -1)
-#         x = F.relu(self.fc1(x))
-#         x = F.relu(self.fc2(x))
-#         x = self.fc3(x)
-#         return x
 model = cnn_models.CustomCNN().cuda()
 model.load_state_dict(torch.load('../outputs/model.pth'))
 print(model)
 print('Model loaded')
 
-def findHand(img):
-    hand = img[100:324,100:324]
+def hand_area(img):
+    hand = img[100:324, 100:324]
     hand = cv2.resize(hand, (224,224))
-    # hand = hand/255
     return hand
 
 cap = cv2.VideoCapture(0)
@@ -65,9 +45,9 @@ out = cv2.VideoWriter('out_videos/asl.avi', cv2.VideoWriter_fourcc('M','J','P','
 while(cap.isOpened()):
     # capture each frame of the video
     ret, frame = cap.read()
-    # frame = cv2.flip(frame, 1)
+    # get the hand area on the video capture screen
     cv2.rectangle(frame, (100, 100), (324, 324), (20,34,255), 2)
-    hand = findHand(frame)
+    hand = hand_area(frame)
 
     image = hand
     
