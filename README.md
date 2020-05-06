@@ -10,7 +10,7 @@ This project aims to achieve American Sign Language Detection using Deep Learnin
 ![](https://github.com/sovit-123/American-Sign-Language-Detection-using-Deep-Learning/blob/master/outputs/Z_test.jpg)
 ![](https://github.com/sovit-123/American-Sign-Language-Detection-using-Deep-Learning/blob/master/outputs/J_test.jpg)
 ![](https://github.com/sovit-123/American-Sign-Language-Detection-using-Deep-Learning/blob/master/outputs/S_test.jpg)
-![](https://github.com/sovit-123/American-Sign-Language-Detection-using-Deep-Learning/blob/master/outputs/asl.mp4)
+
 ### Dataset Used
 
 The dataset used can be found on [Kaggle](https://www.kaggle.com/grassknoted/asl-alphabet.).
