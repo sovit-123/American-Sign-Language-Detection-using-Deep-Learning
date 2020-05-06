@@ -5,6 +5,8 @@
 ## <u>About the Project</u>
 
 This project aims to achieve American Sign Language Detection using Deep Learning. Also, real time webcam detection is a major aim of this project which will be refined from time to time.
+### Some Results
+![](https://github.com/sovit-123/American-Sign-Language-Detection-using-Deep-Learning/blob/master/outputs/A_test.jpg)
 
 ### Dataset Used
 
