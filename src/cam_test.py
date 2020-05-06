@@ -39,7 +39,7 @@ frame_width = int(cap.get(3))
 frame_height = int(cap.get(4))
 
 # define codec and create VideoWriter object
-out = cv2.VideoWriter('out_videos/asl.avi', cv2.VideoWriter_fourcc('M','J','P','G'), 30, (frame_width,frame_height))
+out = cv2.VideoWriter('../outputs/asl.mp4', cv2.VideoWriter_fourcc(*'mp4v'), 30, (frame_width,frame_height))
 
 # read until end of video
 while(cap.isOpened()):
@@ -62,7 +62,7 @@ while(cap.isOpened()):
     
     cv2.putText(frame, lb.classes_[preds], (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
     cv2.imshow('image', frame)
-    # cv2.imwrite(f"../outputs/{args['img']}", frame)
+    out.write(frame)
 
     # time.sleep(0.09)
 
